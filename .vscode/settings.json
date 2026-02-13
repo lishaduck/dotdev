@@ -3,5 +3,6 @@
   "gitlens.ai.enabled": false,
   "files.associations": {
     "*.css": "tailwindcss"
-  }
+  },
+  "elmLS.elmPath": "./node_modules/.bin/lamdera"
 }
