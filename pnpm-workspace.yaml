@@ -1,4 +1,5 @@
 allowBuilds:
+  '@lydell/elm-json': true
   esbuild@0.27.3: true
   lamdera@0.19.1-1.4.0: true
 
