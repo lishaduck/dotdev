@@ -1,4 +1,7 @@
 {
   "chat.disableAIFeatures": true,
-  "gitlens.ai.enabled": false
+  "gitlens.ai.enabled": false,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }
