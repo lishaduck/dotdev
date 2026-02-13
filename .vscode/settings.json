@@ -1,0 +1,4 @@
+{
+  "chat.disableAIFeatures": true,
+  "gitlens.ai.enabled": false
+}
