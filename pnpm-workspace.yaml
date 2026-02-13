@@ -1,0 +1,4 @@
+allowBuilds:
+  esbuild@0.27.3: true
+
+strictDepBuilds: true
