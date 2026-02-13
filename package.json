@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "prepare": "elm-tooling install",
-    "start": "INCLUDE_DRAFTS=true elm-pages dev",
+    "dev": "INCLUDE_DRAFTS=true elm-pages dev",
     "build": "elm-pages build",
     "format": "prettier . --write --experimental-cli",
     "format:check": "prettier . --check --experimental-cli"
