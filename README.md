@@ -13,13 +13,13 @@
 
 # Roadmap
 
-- ~~Layout~~ 
-- ~~Blogposts~~ 
+- ~~Layout~~
+- ~~Blogposts~~
 - ~~Tags~~
-- ~~About page~~ 
-- ~~Syntax highlighting of code~~ 
+- ~~About page~~
+- ~~Syntax highlighting of code~~
   ~~- cover all supported languages~~
-- ~~Previous and next links in blogposts~~ 
+- ~~Previous and next links in blogposts~~
 - ~~Images~~
   - ~~main image in header and in SEO ~~
   - ~~inserting images in body of blogposts~~
@@ -36,4 +36,4 @@ Nice to have later:
 - Show authors posts on about page
 - Support blogposts series
 - Edited date
-- Highlight code lines 
+- Highlight code lines

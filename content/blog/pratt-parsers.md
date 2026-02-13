@@ -4,6 +4,7 @@ description: Pratt parsers are a beautiful way of solving the operator precedenc
 published: "2023-07-03"
 authors: [martin, default]
 ---
+
 ## TL;DR
 
 Here's the algorithm for `pratt(precLimit)`:
@@ -40,10 +41,10 @@ There are [a few algorithms](https://en.wikipedia.org/wiki/Operator-precedence_p
 Pratt parsers are an algorithm that takes your tokens (`[1, +, 2, *, 3]`) and a table like:
 
 | Operator | Precedence |
-| ---      | ---        |
+| -------- | ---------- |
 | +        | 1          |
 | -        | 1          |
-| *        | 2          |
+| \*       | 2          |
 | /        | 2          |
 | ^        | 3          |
 
@@ -114,10 +115,10 @@ If we focus on _adding parentheses_ (instead of tree creation), we want to end u
 Let's assign the precedence values to the operators:
 
 | Operator | Precedence |
-| ---      | ---        |
+| -------- | ---------- |
 | +        | 1          |
 | -        | 1          |
-| *        | 2          |
+| \*       | 2          |
 | /        | 2          |
 | ^        | 3          |
 
@@ -170,6 +171,7 @@ Let's now walk through the algorithm on an example to see that. _(I swear there'
 The source we're trying to parse is `1+2-3*4+5/6^7-8*9`.
 
 It corresponds to a sequence of tokens:
+
 ```elm
 [ 1, +, 2, -, 3, *, 4, +, 5, /, 6, ^, 7, -, 8, *, 9 ]
 ```
@@ -177,10 +179,10 @@ It corresponds to a sequence of tokens:
 The precedences are as follows:
 
 | Operator | Precedence |
-| ---      | ---        |
+| -------- | ---------- |
 | +        | 1          |
 | -        | 1          |
-| *        | 2          |
+| \*       | 2          |
 | /        | 2          |
 | ^        | 3          |
 
@@ -452,7 +454,7 @@ groupedExpr tokens =
     -- Has consumed TLeftParen already
     case pratt 0 tokens of
         Nothing -> Nothing
-        Just (expr, tokensAfterExpr) -> 
+        Just (expr, tokensAfterExpr) ->
             case tokensAfterExpr of
                 -- A closing paren must follow
                 TRightParen :: rest -> Just (expr, rest)
@@ -494,7 +496,7 @@ binaryOp left op precedence tokensAfterOp =
 which then gives us the freedom to write postfix parsers. With some handwaving they could look like:
 
 ```elm
-{-| 
+{-|
 Example: 5!
 
 Token expectations:
