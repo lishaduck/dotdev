@@ -18,6 +18,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.19
         version: 0.5.19(tailwindcss@4.1.18)
+      '@types/node':
+        specifier: ^25.2.3
+        version: 25.2.3
       elm-codegen:
         specifier: ^0.6.1
         version: 0.6.3
@@ -45,6 +48,9 @@ importers:
       tailwindcss:
         specifier: ^4.1.18
         version: 4.1.18
+      typescript:
+        specifier: 6.0.0-beta
+        version: 6.0.0-beta
       vite:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)
@@ -2223,6 +2229,11 @@ packages:
   typescript@4.9.5:
     resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
     engines: {node: '>=4.2.0'}
+    hasBin: true
+
+  typescript@6.0.0-beta:
+    resolution: {integrity: sha512-CldZdztDpQRLM1HC6WDQjQkQN5Ub5zRau737a1diGh3lPmb9oRsaWHk1y5iqK0o7+1bNJ0oXfEGRkAogFZBL+Q==}
+    engines: {node: '>=14.17'}
     hasBin: true
 
   undici-types@7.16.0:
@@ -4528,6 +4539,8 @@ snapshots:
       mime-types: 2.1.35
 
   typescript@4.9.5: {}
+
+  typescript@6.0.0-beta: {}
 
   undici-types@7.16.0: {}
 

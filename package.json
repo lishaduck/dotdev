@@ -5,11 +5,13 @@
     "dev": "INCLUDE_DRAFTS=true elm-pages dev",
     "build": "elm-pages build",
     "format": "prettier . --write --experimental-cli",
-    "format:check": "prettier . --check --experimental-cli"
+    "format:check": "prettier . --check --experimental-cli",
+    "check": "tsc --noEmit"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^25.2.3",
     "elm-codegen": "^0.6.1",
     "elm-json": "npm:@lydell/elm-json@0.2.13-1",
     "elm-optimize-level-2": "^0.3.5",
@@ -19,6 +21,7 @@
     "lamdera": "0.19.1-1.4.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
+    "typescript": "6.0.0-beta",
     "vite": "^7.3.1"
   },
   "dependencies": {
