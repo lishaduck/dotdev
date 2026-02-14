@@ -84,7 +84,7 @@ view app _ =
                         ]
                     ]
                 ]
-                [ Html.text "atest" ]
+                [ Html.text "Latest" ]
             , Html.p
                 [ classes
                     [ Tw.text_lg
