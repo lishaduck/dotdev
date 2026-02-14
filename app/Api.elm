@@ -17,7 +17,9 @@ routes :
     -> (Maybe { indent : Int, newLines : Bool } -> Html Never -> String)
     -> List (ApiRoute ApiRoute.Response)
 routes getStaticRoutes htmlToString =
-    [ rssRoute ]
+    [ Manifest.generator Settings.canonicalUrl (BackendTask.succeed manifest)
+    , rssRoute
+    ]
 
 
 rssRoute : ApiRoute ApiRoute.Response
