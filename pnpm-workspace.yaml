@@ -1,6 +1,13 @@
 allowBuilds:
   '@lydell/elm-json': true
+  elm: true
+  elm-format: true
+  elm-tailwind-classes: false
   esbuild@0.27.3: true
   lamdera@0.19.1-1.4.0: true
+
+peerDependencyRules:
+  allowedVersions:
+    typescript: '6'
 
 strictDepBuilds: true

@@ -3,5 +3,6 @@ node_modules/
 elm-stuff/
 dist/
 .elm-pages/
+.elm-tailwind/
 functions/
 .idea/

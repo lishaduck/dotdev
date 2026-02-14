@@ -1,8 +1,12 @@
 import { defineConfig } from "vite";
 import adapter from "elm-pages/adapter/netlify.js";
+import tailwindcss from "@tailwindcss/vite";
+import elmTailwind from "elm-tailwind-classes";
 
 export default {
-  vite: defineConfig({}),
+  vite: defineConfig({
+    plugins: [elmTailwind(), tailwindcss()],
+  }),
   adapter,
   headTagsTemplate(context) {
     return `

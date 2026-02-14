@@ -4,19 +4,16 @@ import BackendTask exposing (BackendTask)
 import Content.Blogpost exposing (Metadata)
 import FatalError exposing (FatalError)
 import Head
-import Head.Seo as Seo
 import Html
-import Html.Attributes as Attrs
-import LanguageTag.Language as Language
-import LanguageTag.Region as Region
 import Layout
 import Layout.Blogpost
-import Pages.Url
 import PagesMsg exposing (PagesMsg)
 import RouteBuilder exposing (App, StatelessRoute)
 import Settings
 import Shared
-import UrlPath
+import Tailwind as Tw exposing (classes)
+import Tailwind.Breakpoints exposing (dark, md, sm)
+import Tailwind.Theme exposing (gray, s100, s400, s500, s8, s900)
 import View exposing (View)
 
 
@@ -71,9 +68,32 @@ view app _ =
     { title = Settings.title
     , body =
         --TODO move to layout part
-        [ Html.div [ Attrs.class "space-y-2 pb-8 pt-6 md:space-y-5" ]
-            [ Html.h1 [ Attrs.class "text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14" ] [ Html.text "Latest" ]
-            , Html.p [ Attrs.class "text-lg leading-7 text-gray-500 dark:text-gray-400" ] [ Html.text Settings.subtitle ]
+        [ Html.div [ classes [ Tw.pb s8, Tw.pt s8 ] ]
+            [ Html.h1
+                [ classes
+                    [ Tw.text_n2xl
+                    , Tw.font_extrabold
+                    , Tw.raw "leading-9"
+                    , Tw.raw "tracking-tight"
+                    , Tw.text_color (gray s900)
+                    , dark [ Tw.text_color (gray s100) ]
+                    , sm [ Tw.text_n4xl, Tw.raw "leading-10" ]
+                    , md
+                        [ Tw.text_n6xl
+                        , Tw.raw "leading-14"
+                        ]
+                    ]
+                ]
+                [ Html.text "atest" ]
+            , Html.p
+                [ classes
+                    [ Tw.text_lg
+                    , Tw.raw "leading-7"
+                    , Tw.text_color (gray s500)
+                    , dark [ Tw.text_color (gray s400) ]
+                    ]
+                ]
+                [ Html.text Settings.subtitle ]
             ]
         , Html.div [] <| List.map Layout.Blogpost.viewListItem app.data.blogpostMetadata
         ]
