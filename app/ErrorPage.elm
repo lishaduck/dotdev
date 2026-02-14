@@ -6,7 +6,7 @@ import View exposing (View)
 
 
 type Msg
-    = NoOp
+    = NoOp Never
 
 
 type alias Model =

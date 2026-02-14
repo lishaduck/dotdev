@@ -33,7 +33,7 @@ type alias Data =
 
 
 type SharedMsg
-    = NoOp
+    = NoOp Never
 
 
 type alias Model =

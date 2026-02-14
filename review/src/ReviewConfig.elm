@@ -38,7 +38,6 @@ config =
     , NoConfusingPrefixOperator.rule
     , NoDebug.Log.rule
     , NoDebug.TodoOrToString.rule
-        |> Rule.ignoreErrorsForDirectories [ "tests/" ]
     , NoExposingEverything.rule
     , NoImportingEverything.rule []
     , NoMissingTypeAnnotation.rule
@@ -48,11 +47,11 @@ config =
     , NoUnused.CustomTypeConstructors.rule []
     , NoUnused.CustomTypeConstructorArgs.rule
     , NoUnused.Dependencies.rule
-    , NoUnused.Exports.rule
-    , NoUnused.Parameters.rule
+    , NoUnused.Exports.rule |> Rule.ignoreErrorsForDirectories ["app/"]
+    , NoUnused.Parameters.rule |> Rule.ignoreErrorsForDirectories ["app/"]
     , NoUnused.Patterns.rule
     , NoUnused.Variables.rule
     , Simplify.rule Simplify.defaults
     ]
-        |> List.map (Rule.ignoreErrorsForDirectories [ ".elm-pages/", "app/" ])
+        |> List.map (Rule.ignoreErrorsForDirectories [ ".elm-pages/", ".elm-tailwind" ])
 
