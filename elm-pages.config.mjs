@@ -10,7 +10,6 @@ export default {
   adapter,
   headTagsTemplate(context) {
     return `
-<link rel="stylesheet" href="/style.css" />
 <link rel="icon" href="/media/logo.svg">
 <link rel="mask-icon" href="/media/logo.svg" color="#000000">
 <link rel="apple-touch-icon" href="/media/logo-180.png">
