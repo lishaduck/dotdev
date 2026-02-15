@@ -47,11 +47,10 @@ config =
     , NoUnused.CustomTypeConstructors.rule []
     , NoUnused.CustomTypeConstructorArgs.rule
     , NoUnused.Dependencies.rule
-    , NoUnused.Exports.rule |> Rule.ignoreErrorsForDirectories ["app/"]
-    , NoUnused.Parameters.rule |> Rule.ignoreErrorsForDirectories ["app/"]
+    , NoUnused.Exports.rule |> Rule.ignoreErrorsForDirectories [ "app/" ]
+    , NoUnused.Parameters.rule |> Rule.ignoreErrorsForDirectories [ "app/" ]
     , NoUnused.Patterns.rule
     , NoUnused.Variables.rule
     , Simplify.rule Simplify.defaults
     ]
         |> List.map (Rule.ignoreErrorsForDirectories [ ".elm-pages/", ".elm-tailwind" ])
-
