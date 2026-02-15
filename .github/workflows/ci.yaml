@@ -1,0 +1,229 @@
+name: CI/CD
+
+on:
+  # Run on pushes to the default branch.
+  push:
+    branches:
+      - main
+
+  # Run on all PRs.
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+  # Support merge queues.
+  merge_group:
+
+  # Run on a schedule.
+  schedule:
+    - cron: "0 14 * * 1" # Every Monday at 9 in the morning CST
+
+  # Allow running this workflow manually from the Actions tab.
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash -noprofile --norc -euo pipefail {0}
+
+jobs:
+  build:
+    name: Build
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📚 Git checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+          clean: true
+          persist-credentials: false
+          set-safe-directory: true
+      - name: 📦 Install dependencies
+        uses: pnpm/action-setup@1e1c8eafbd745f64b1ef30a7d7ed7965034c486c # master
+        with:
+          cache: true
+          run_install: true
+      - # Workaround to dillonkearns/elm-tailwind-classes#3.
+        name: ⚙️ Generate Tailwind
+        run: pnpm elm-review --extract --report=json --config node_modules/elm-tailwind-classes/extractor
+      - name: 🔧 Build
+        run: pnpm run build
+      - name: ⚙️ Restore lychee cache
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+      - name: 🪄 Link check
+        uses: lycheeverse/lychee-action@a8c4c7cb88f0c7386610c35eb25108e448569cb0 # v2.7.0
+        with:
+          args: --cache --max-cache-age 1d .
+          token: ${{ github.token }}
+          lycheeVersion: v0.23.0
+
+  lint:
+    name: Linting
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: 📚 Git checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+          clean: true
+          persist-credentials: false
+          set-safe-directory: true
+      - name: 📦 Install dependencies
+        uses: pnpm/action-setup@1e1c8eafbd745f64b1ef30a7d7ed7965034c486c # master
+        with:
+          cache: true
+          run_install: true
+      - name: ⚙️ Generate .elm-pages
+        run: pnpm exec elm-pages gen
+      - name: 🕵️ Analyze project source
+        run: pnpm exec elm-review
+
+  tsc:
+    name: Typecheck TypeScript
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: 📚 Git checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+          clean: true
+          persist-credentials: false
+          set-safe-directory: true
+      - name: 📦 Install dependencies
+        uses: pnpm/action-setup@1e1c8eafbd745f64b1ef30a7d7ed7965034c486c # master
+        with:
+          cache: true
+          run_install: true
+      - name: 🕵️ Typecheck
+        run: pnpm run typecheck
+
+  prettier:
+    name: Formatting (Prettier)
+    timeout-minutes: 3
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: 📚 Git checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+          clean: true
+          persist-credentials: false
+          set-safe-directory: true
+      - name: 📦 Install dependencies
+        uses: pnpm/action-setup@1e1c8eafbd745f64b1ef30a7d7ed7965034c486c # master
+        with:
+          cache: true
+          run_install: true
+      - name: ✨ Verify formatting
+        run: pnpm run format:prettier:check
+
+  elm-format:
+    name: Formatting (Elm)
+    timeout-minutes: 3
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: 📚 Git checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+          clean: true
+          persist-credentials: false
+          set-safe-directory: true
+      - name: 📦 Install dependencies
+        uses: pnpm/action-setup@1e1c8eafbd745f64b1ef30a7d7ed7965034c486c # master
+        with:
+          cache: true
+          run_install: true
+      - name: ✨ Verify formatting
+        run: pnpm run format:elm:check
+
+  spell-check:
+    name: Check Spelling
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+          clean: true
+          persist-credentials: false
+          set-safe-directory: true
+
+      - name: 🪄 Spell Check Repo
+        uses: crate-ci/typos@78bc6fb2c0d734235d57a2d6b9de923cc325ebdd # v1.43.4
+
+  markdownlint:
+    name: Lint Markdown
+    timeout-minutes: 4
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+          clean: true
+          persist-credentials: false
+          set-safe-directory: true
+      - name: 📦 Install dependencies
+        uses: pnpm/action-setup@1e1c8eafbd745f64b1ef30a7d7ed7965034c486c # master
+        with:
+          cache: true
+          run_install: true
+      - name: 🕵️ Markdown linting
+        run: pnpm exec markdownlint-cli2 '**/*.md' "#node_modules"
+
+  zizmor:
+    name: Run zizmor
+    timeout-minutes: 1
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+          clean: true
+          persist-credentials: false
+          set-safe-directory: true
+      - name: 🌈 Run zizmor
+        uses: zizmorcore/zizmor-action@0dce2577a4760a2749d8cfb7a84b7d5585ebcb7d # v0.5.0
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

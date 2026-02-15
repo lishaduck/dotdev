@@ -1,0 +1,2 @@
+require_https = true
+root_dir = "./dist"

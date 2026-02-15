@@ -4,9 +4,12 @@
   "scripts": {
     "dev": "INCLUDE_DRAFTS=true elm-pages dev",
     "build": "elm-pages build",
-    "format": "prettier . --write --experimental-cli",
-    "format:check": "prettier . --check --experimental-cli",
-    "check": "tsc --noEmit"
+    "format:elm": "lamdera format app/ review/ script/ src/ --yes",
+    "format:elm:check": "lamdera format app/ review/ script/ src/ --validate",
+    "format:prettier": "prettier . --write --experimental-cli",
+    "format:prettier:check": "prettier . --check --experimental-cli",
+    "typecheck": "tsc --noEmit",
+    "lint:markdown": "markdownlint-cli2 '**/*.md' '#node_modules'"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
@@ -20,8 +23,10 @@
     "elm-pages": "^3.0.28",
     "elm-review": "^2.13.5",
     "elm-tailwind-classes": "^0.1.1",
-    "elm-test": "0.19.1-revision17",
     "lamdera": "0.19.1-1.4.0",
+    "markdownlint": "^0.40.0",
+    "markdownlint-cli2": "^0.20.0",
+    "prettier": "^3.8.1",
     "typescript": "6.0.0-beta",
     "vite": "^7.3.1"
   },
