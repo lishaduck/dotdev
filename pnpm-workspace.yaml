@@ -6,6 +6,10 @@ allowBuilds:
   esbuild@0.27.3: true
   lamdera@0.19.1-1.4.0: true
 
+overrides:
+  lightningcss: '1.31.1'
+  vite: '8.0.0-beta.14'
+
 peerDependencyRules:
   allowedVersions:
     typescript: '6'
