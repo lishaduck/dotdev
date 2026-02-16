@@ -1,4 +1,4 @@
-module View exposing (View, map, freeze, freezableToHtml, htmlToFreezable)
+module View exposing (View, map, freeze, Freezable, freezableToHtml, htmlToFreezable)
 
 {-| View module for elm-pages with frozen view support.
 
@@ -22,6 +22,7 @@ map fn doc =
     { title = doc.title
     , body = List.map (Html.map fn) doc.body
     }
+
 
 {-| The type of content that can be frozen. Must produce no messages (Never).
 For plain Html, this is just Html Never.

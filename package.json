@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "INCLUDE_DRAFTS=true elm-pages dev",
-    "build": "elm-pages build",
+    "build": "elm-pages build --strict",
     "format:elm": "lamdera format app/ review/ script/ src/ --yes",
     "format:elm:check": "lamdera format app/ review/ script/ src/ --validate",
     "format:prettier": "prettier . --write --experimental-cli",
