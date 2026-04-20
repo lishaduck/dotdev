@@ -83,7 +83,7 @@ view app _ =
                             [ Tw.text_n3xl
                             , Tw.font_extrabold
                             , raw "leading-9"
-                            , raw "tracking-tight"
+                            , Tw.tracking_tight
                             , Tw.text_color (gray s900)
                             , dark [ Tw.text_color (gray s100) ]
                             , sm [ Tw.text_n4xl, raw "leading-10" ]
