@@ -1,10 +1,16 @@
 allowBuilds:
-  '@lydell/elm-json': true
-  elm: true
-  elm-format: true
-  elm-tailwind-classes: false
-  esbuild@0.27.3: true
+  '@lydell/elm-json@0.2.13-1': true
+  elm@0.19.1-6: true
+  elm-format@0.8.8: true
+  elm-tailwind-classes@0.6.2: false
+  esbuild@0.27.7: true
   lamdera@0.19.1-1.4.0: true
+
+blockExoticSubdeps: true
+minimumReleaseAge: 1440
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - semver@5.7.2
 
 peerDependencyRules:
   allowedVersions:
