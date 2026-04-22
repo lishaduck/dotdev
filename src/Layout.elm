@@ -48,23 +48,17 @@ menu =
 logo : Html msg
 logo =
     Html.div
-        [ Attrs.class "mr-1 text-primary-600 dark:text-primary-500"
+        [ classes
+            [ Tw.mr s1
+            , Tw.text_color (primary s600)
+            , dark [ Tw.text_color (primary s500) ]
+            ]
         ]
-        [ Svg.svg
-            [ SvgAttrs.width "80"
-            , SvgAttrs.height "80"
-            , SvgAttrs.viewBox "0 0 700 351"
+        [ img
+            [ src "/media/logo.svg"
+            , classes [ Tw.h s10, Tw.w s10, Tw.rounded_xl ]
             ]
-            [ Svg.g
-                [ SvgAttrs.fill "currentColor"
-                , SvgAttrs.fillRule "evenodd"
-                ]
-                [ Svg.path
-                    [ SvgAttrs.d "M529.5 169 700 0H359zM349.7 349l79.7-79H270zM266.2 86.5l79 79.7V6.8zM352 180h168l-82 82H270zM175.77 176.5l84.85-84.85 84.85 84.85-84.85 84.85zM353.03 173.3l166.87-1.4L354.44 6.42zM170.5 182 341 351H0z"
-                    ]
-                    []
-                ]
-            ]
+            []
         ]
 
 
@@ -179,7 +173,7 @@ view showMenu onMenuToggle body =
                             ]
                             [ logo
                             , Html.div
-                                [ Attrs.class "h-6 text-2xl font-semibold dark:text-white"
+                                [ Attrs.class "min-h-6 text-2xl font-semibold dark:text-white"
                                 ]
                                 [ Html.text Settings.title ]
                             ]
@@ -197,7 +191,7 @@ view showMenu onMenuToggle body =
                     , Html.div []
                         [ Html.text "•" ]
                     , Html.div []
-                        [ Html.text "© 2023" ]
+                        [ Html.text "© 2026" ]
                     , Html.div []
                         [ Html.text "•" ]
                     , Html.a
@@ -205,17 +199,6 @@ view showMenu onMenuToggle body =
                         , Attrs.class "hover:underline"
                         ]
                         [ Html.text Settings.title ]
-                    ]
-                , Html.div
-                    [ Attrs.class "mb-8 text-sm text-gray-500 dark:text-gray-400"
-                    ]
-                    [ Html.a
-                        [ Attrs.target "_blank"
-                        , Attrs.rel "noopener noreferrer"
-                        , Attrs.href "https://github.com/kraklin/elm-pages-blog-starter"
-                        , Attrs.class "hover:underline"
-                        ]
-                        [ Html.text "elm-pages blog template" ]
                     ]
                 ]
             ]

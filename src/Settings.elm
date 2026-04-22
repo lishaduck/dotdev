@@ -22,14 +22,14 @@ locale =
 
 title : String
 title =
-    "elm blog"
+    "lishaduck"
 
 
 subtitle : String
 subtitle =
-    "A blog starter kit created with elm-pages and TailwindCSS"
+    "Static analysis, functional programming, and other musings."
 
 
 author : String
 author =
-    "Tomas Latal"
+    "Elisha Dukes"
