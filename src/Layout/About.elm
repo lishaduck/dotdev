@@ -10,6 +10,23 @@ import Layout.Markdown as Markdown
 import Pages.Url
 import Phosphor
 import Settings
+import Tailwind as Tw exposing (classes, raw)
+import Tailwind.Breakpoints exposing (dark, hover, md, sm, xl)
+import Tailwind.Theme
+    exposing
+        ( gray
+        , primary
+        , s100
+        , s2
+        , s200
+        , s4
+        , s400
+        , s48
+        , s500
+        , s6
+        , s8
+        , s900
+        )
 import UrlPath
 
 
@@ -81,38 +98,70 @@ socialsView socials =
                 , Attrs.href <| socialLink name link
                 ]
                 [ Html.span
-                    [ Attrs.class "sr-only"
-                    ]
+                    [ classes [ Tw.sr_only ] ]
                     [ Html.text name ]
                 , icon name Phosphor.Regular
-                    |> Phosphor.withClass "fill-current text-gray-500 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-8 w-8"
+                    |> Phosphor.withClass
+                        ([ raw "fill-current"
+                         , Tw.text_color (gray s500)
+                         , hover [ Tw.text_color (primary s500) ]
+                         , dark
+                            [ Tw.text_color (gray s200)
+                            , hover [ Tw.text_color (primary s400) ]
+                            ]
+                         , Tw.h s8
+                         , Tw.w s8
+                         ]
+                            |> Tw.batch
+                            |> Tw.toClass
+                        )
                     |> Phosphor.toHtml []
                 ]
     in
     List.map socialView socials
-        |> Html.div
-            [ Attrs.class "flex space-x-3 pt-6"
-            ]
+        |> Html.div [ classes [ Tw.flex, raw "space-x-3", Tw.pt s6 ] ]
 
 
 view : Author -> Html msg
 view author =
     Html.div
-        [ Attrs.class "divide-y divide-gray-200 dark:divide-gray-700"
-        ]
+        [ classes [ Tw.divide_y, raw "divide-gray-200 dark:divide-gray-700" ] ]
         [ Html.div
-            [ Attrs.class "space-y-2 pb-8 pt-6 md:space-y-5"
+            [ classes
+                [ raw "space-y-2"
+                , Tw.pb s8
+                , Tw.pt s6
+                , md [ raw "space-y-5" ]
+                ]
             ]
             [ Html.h1
-                [ Attrs.class "text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
+                [ classes
+                    [ Tw.text_3xl
+                    , Tw.font_extrabold
+                    , Tw.tracking_tight
+                    , Tw.text_color (gray s900)
+                    , dark [ Tw.text_color (gray s100) ]
+                    , sm [ Tw.text_n4xl, raw "leading-10" ]
+                    , md [ Tw.text_n6xl, raw "leading-14" ]
+                    ]
                 ]
                 [ Html.text "About" ]
             ]
         , Html.div
-            [ Attrs.class "items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0"
+            [ classes
+                [ Tw.items_start
+                , raw "space-y-2"
+                , xl [ Tw.grid, Tw.grid_cols_3, Tw.gap_x s8, raw "space-y-0" ]
+                ]
             ]
             [ Html.div
-                [ Attrs.class "flex flex-col items-center space-x-2 pt-8"
+                [ classes
+                    [ Tw.flex
+                    , Tw.flex_col
+                    , Tw.items_center
+                    , raw "space-x-2"
+                    , Tw.pt s8
+                    ]
                 ]
                 [ Html.img
                     [ Attrs.alt "avatar"
@@ -121,19 +170,29 @@ view author =
                     , Attrs.height 192
                     , Attrs.attribute "decoding" "async"
                     , Attrs.attribute "data-nimg" "1"
-                    , Attrs.class "h-48 w-48 rounded-full"
+                    , classes [ Tw.h s48, Tw.w s48, Tw.rounded_full ]
                     , Attrs.src "/images/authors/default.png"
                     , Attrs.style "color" "transparent"
                     ]
                     []
                 , Html.h3
-                    [ Attrs.class "pb-2 pt-4 text-2xl font-bold leading-8 tracking-tight"
+                    [ classes
+                        [ Tw.pb s2
+                        , Tw.pt s4
+                        , Tw.text_2xl
+                        , Tw.font_bold
+                        , raw "leading-8"
+                        , raw "tracking-tight"
+                        ]
                     ]
                     [ Html.text author.name ]
                 , Html.Extra.viewMaybe
                     (\occupation ->
                         Html.div
-                            [ Attrs.class "text-gray-500 dark:text-gray-400"
+                            [ classes
+                                [ Tw.text_color (gray s500)
+                                , dark [ Tw.text_color (gray s400) ]
+                                ]
                             ]
                             [ Html.text occupation ]
                     )
@@ -141,7 +200,10 @@ view author =
                 , Html.Extra.viewMaybe
                     (\company ->
                         Html.div
-                            [ Attrs.class "text-gray-500 dark:text-gray-400"
+                            [ classes
+                                [ Tw.text_color (gray s500)
+                                , dark [ Tw.text_color (gray s400) ]
+                                ]
                             ]
                             [ Html.text company ]
                     )
@@ -149,7 +211,14 @@ view author =
                 , socialsView author.socials
                 ]
             , Html.div
-                [ Attrs.class "prose max-w-none pb-8 pt-8 dark:prose-invert xl:col-span-2"
+                [ classes
+                    [ Tw.prose
+                    , raw "max-w-none"
+                    , Tw.pb s8
+                    , Tw.pt s8
+                    , dark [ Tw.prose_invert ]
+                    , xl [ Tw.col_span_2 ]
+                    ]
                 ]
               <|
                 Markdown.toHtmlBlocks author.body
