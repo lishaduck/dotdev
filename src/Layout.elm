@@ -2,8 +2,8 @@ module Layout exposing (seoHeaders, view)
 
 import Head exposing (Tag)
 import Head.Seo as Seo
-import Html exposing (Html)
-import Html.Attributes as Attrs
+import Html exposing (Html, img)
+import Html.Attributes as Attrs exposing (src)
 import Html.Events as Events
 import LanguageTag.Language as Language
 import LanguageTag.Region as Region
@@ -12,6 +12,31 @@ import Route exposing (Route)
 import Settings
 import Svg
 import Svg.Attributes as SvgAttrs
+import Tailwind as Tw exposing (classes, raw)
+import Tailwind.Breakpoints exposing (dark, hover, sm, xl)
+import Tailwind.Extra exposing (svgClasses)
+import Tailwind.Theme
+    exposing
+        ( gray
+        , primary
+        , s0
+        , s1
+        , s10
+        , s100
+        , s11
+        , s12
+        , s16
+        , s2
+        , s4
+        , s400
+        , s500
+        , s6
+        , s600
+        , s8
+        , s900
+        , s950
+        , white
+        )
 import UrlPath
 
 
@@ -65,7 +90,15 @@ logo =
 viewMainMenuItem : { label : String, route : Route } -> Html msg
 viewMainMenuItem { label, route } =
     Route.link
-        [ Attrs.class "hidden sm:block font-medium text-gray-900 dark:text-gray-100 hover:underline decoration-primary-500"
+        [ classes
+            [ Tw.hidden
+            , sm [ Tw.block ]
+            , Tw.font_medium
+            , Tw.text_color (gray s900)
+            , dark [ Tw.text_color (gray s100) ]
+            , hover [ Tw.underline ]
+            , raw "decoration-primary-500"
+            ]
         ]
         [ Html.text label ]
         route
@@ -74,10 +107,15 @@ viewMainMenuItem { label, route } =
 viewSideMainMenuItem : msg -> { label : String, route : Route } -> Html msg
 viewSideMainMenuItem onMenuToggle { label, route } =
     Html.div
-        [ Attrs.class "px-12 py-4"
-        ]
+        [ classes [ Tw.px s12, Tw.py s4 ] ]
         [ Route.link
-            [ Attrs.class "text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
+            [ classes
+                [ Tw.text_2xl
+                , Tw.font_bold
+                , Tw.tracking_widest
+                , Tw.text_color (gray s900)
+                , dark [ Tw.text_color (gray s100) ]
+                ]
             , Events.onClick onMenuToggle
             ]
             [ Html.text label ]
@@ -97,18 +135,29 @@ viewMenu showMenu onMenuToggle =
                 |> List.map (viewSideMainMenuItem onMenuToggle)
     in
     Html.nav
-        [ Attrs.class "flex items-center leading-5 space-x-4 sm:space-x-6"
+        [ classes
+            [ Tw.flex
+            , Tw.items_center
+            , raw "leading-5"
+            , raw "space-x-4"
+            , sm [ raw "space-x-6" ]
+            ]
         ]
         (mainMenuItems
             ++ [ Html.button
                     [ Attrs.attribute "aria-label" "Toggle Menu"
-                    , Attrs.class "sm:hidden"
+                    , classes [ sm [ Tw.hidden ] ]
                     , Events.onClick onMenuToggle
                     ]
                     [ Svg.svg
                         [ SvgAttrs.viewBox "0 0 20 20"
                         , SvgAttrs.fill "currentColor"
-                        , SvgAttrs.class "text-gray-900 dark:text-gray-100 h-8 w-8"
+                        , svgClasses
+                            [ Tw.text_color (gray s900)
+                            , dark [ Tw.text_color (gray s100) ]
+                            , Tw.h s8
+                            , Tw.w s8
+                            ]
                         ]
                         [ Svg.path
                             [ SvgAttrs.fillRule "evenodd"
@@ -119,24 +168,40 @@ viewMenu showMenu onMenuToggle =
                         ]
                     ]
                , Html.div
-                    [ Attrs.class "fixed left-0 top-0 z-10 h-full w-full transform opacity-95 dark:opacity-[0.98] bg-white duration-300 ease-in-out dark:bg-gray-950"
-                    , Attrs.classList
-                        [ ( "translate-x-0", showMenu )
-                        , ( "translate-x-full", not showMenu )
+                    [ classes
+                        [ Tw.fixed
+                        , raw "left-0"
+                        , raw "top-0"
+                        , Tw.z_0
+                        , Tw.h_full
+                        , Tw.w_full
+                        , Tw.transform
+                        , Tw.opacity_95
+                        , dark [ raw "opacity-[0.98]", Tw.bg_color (gray s950) ]
+                        , Tw.bg_simple white
+                        , Tw.duration_300
+                        , Tw.ease_in_out
+                        , if showMenu then
+                            raw "translate-x-0"
+
+                          else
+                            Tw.translate_x_full
                         ]
                     ]
                     [ Html.div
-                        [ Attrs.class "flex justify-end"
-                        ]
+                        [ classes [ Tw.flex, Tw.justify_end ] ]
                         [ Html.button
-                            [ Attrs.class "mr-8 mt-11 h-8 w-8"
+                            [ classes [ Tw.mr s8, Tw.mt s11, Tw.w s8, Tw.h s8 ]
                             , Attrs.attribute "aria-label" "Toggle Menu"
                             , Events.onClick onMenuToggle
                             ]
                             [ Svg.svg
                                 [ SvgAttrs.viewBox "0 0 20 20"
                                 , SvgAttrs.fill "currentColor"
-                                , SvgAttrs.class "text-gray-900 dark:text-gray-100"
+                                , svgClasses
+                                    [ Tw.text_color (gray s900)
+                                    , dark [ Tw.text_color (gray s100) ]
+                                    ]
                                 ]
                                 [ Svg.path
                                     [ SvgAttrs.fillRule "evenodd"
@@ -148,8 +213,7 @@ viewMenu showMenu onMenuToggle =
                             ]
                         ]
                     , Html.div
-                        [ Attrs.class "fixed mt-8 h-full"
-                        ]
+                        [ classes [ Tw.fixed, Tw.mt s8, Tw.h_full ] ]
                         sideMenuItems
                     ]
                ]
@@ -158,10 +222,31 @@ viewMenu showMenu onMenuToggle =
 
 view : Bool -> msg -> List (Html msg) -> List (Html msg)
 view showMenu onMenuToggle body =
-    [ Html.div [ Attrs.class "mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0" ]
-        [ Html.div [ Attrs.class "flex h-screen flex-col justify-between font-sans" ]
+    [ Html.div
+        [ classes
+            [ Tw.mx_auto
+            , raw "max-w-3xl"
+            , Tw.px s4
+            , sm [ Tw.px s6 ]
+            , xl [ raw "max-w-5xl", Tw.px s0 ]
+            ]
+        ]
+        [ Html.div
+            [ classes
+                [ Tw.flex
+                , Tw.h_screen
+                , Tw.flex_col
+                , Tw.justify_between
+                , Tw.font_sans
+                ]
+            ]
             [ Html.header
-                [ Attrs.class "flex items-center justify-between py-10"
+                [ classes
+                    [ Tw.flex
+                    , Tw.items_center
+                    , Tw.justify_between
+                    , Tw.py s10
+                    ]
                 ]
                 [ Html.div []
                     [ Html.a
@@ -169,11 +254,20 @@ view showMenu onMenuToggle body =
                         , Attrs.href "/"
                         ]
                         [ Html.div
-                            [ Attrs.class "flex items-center justify-between"
+                            [ classes
+                                [ Tw.flex
+                                , Tw.items_center
+                                , Tw.justify_between
+                                ]
                             ]
                             [ logo
                             , Html.div
-                                [ Attrs.class "min-h-6 text-2xl font-semibold dark:text-white"
+                                [ classes
+                                    [ Tw.min_h s6
+                                    , Tw.text_2xl
+                                    , Tw.font_semibold
+                                    , dark [ Tw.text_simple white ]
+                                    ]
                                 ]
                                 [ Html.text Settings.title ]
                             ]
@@ -181,10 +275,24 @@ view showMenu onMenuToggle body =
                     ]
                 , viewMenu showMenu onMenuToggle
                 ]
-            , Html.main_ [ Attrs.class "w-full mb-auto" ] body
-            , Html.footer [ Attrs.class "mt-16 flex flex-col items-center" ]
+            , Html.main_ [ classes [ Tw.w_full, Tw.mb_auto ] ] body
+            , Html.footer
+                [ classes
+                    [ Tw.mt s16
+                    , Tw.flex
+                    , Tw.flex_col
+                    , Tw.items_center
+                    ]
+                ]
                 [ Html.div
-                    [ Attrs.class "mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400"
+                    [ classes
+                        [ Tw.mb s2
+                        , Tw.flex
+                        , raw "space-x-2"
+                        , Tw.text_sm
+                        , Tw.text_color (gray s500)
+                        , dark [ Tw.text_color (gray s400) ]
+                        ]
                     ]
                     [ Html.div []
                         [ Html.text Settings.author ]
@@ -196,7 +304,7 @@ view showMenu onMenuToggle body =
                         [ Html.text "•" ]
                     , Html.a
                         [ Attrs.href "/"
-                        , Attrs.class "hover:underline"
+                        , classes [ hover [ Tw.underline ] ]
                         ]
                         [ Html.text Settings.title ]
                     ]
