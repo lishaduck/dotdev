@@ -171,7 +171,7 @@ view author =
                     , Attrs.attribute "decoding" "async"
                     , Attrs.attribute "data-nimg" "1"
                     , classes [ Tw.h s48, Tw.w s48, Tw.rounded_full ]
-                    , Attrs.src "/images/authors/default.png"
+                    , Attrs.src (author.avatar |> Maybe.withDefault "/images/authors/default.png")
                     , Attrs.style "color" "transparent"
                     ]
                     []
