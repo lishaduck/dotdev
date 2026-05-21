@@ -27,11 +27,16 @@ defaults:
   run:
     shell: bash -noprofile --norc -euo pipefail {0}
 
+permissions: {}
+
 jobs:
   build:
     name: Build
     timeout-minutes: 5
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
 
     steps:
       - name: 📚 Git checkout
@@ -46,9 +51,6 @@ jobs:
         with:
           cache: true
           run_install: true
-      - # Workaround to dillonkearns/elm-tailwind-classes#3.
-        name: ⚙️ Generate Tailwind
-        run: pnpm elm-review --extract --report=json --config node_modules/elm-tailwind-classes/extractor
       - name: 🔧 Build
         run: pnpm run build
       - name: ⚙️ Restore lychee cache

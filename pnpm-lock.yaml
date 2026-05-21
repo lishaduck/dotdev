@@ -57,6 +57,9 @@ importers:
       markdownlint-cli2:
         specifier: ^0.22.0
         version: 0.22.0
+      node:
+        specifier: runtime:26.2.0
+        version: runtime:26.2.0
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
@@ -2003,6 +2006,96 @@ packages:
   node-elm-compiler@5.0.6:
     resolution: {integrity: sha512-DWTRQR8b54rvschcZRREdsz7K84lnS8A6YJu8du3QLQ8f204SJbyTaA6NzYYbfUG97OTRKRv/0KZl82cTfpLhA==}
     engines: {node: '>=4.0.0'}
+
+  node@runtime:26.2.0:
+    resolution:
+      type: variations
+      variants:
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-zvLmWJf5cIi1EvkiiWpW3j7AYU0CCBbvDst2KQ5wi4E=
+            type: binary
+            url: https://nodejs.org/download/release/v26.2.0/node-v26.2.0-aix-ppc64.tar.gz
+          targets:
+            - cpu: ppc64
+              os: aix
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-LYV1tqdJwLxmzG7NIqlS99m787Dqdvyw7TzoWAGK//c=
+            type: binary
+            url: https://nodejs.org/download/release/v26.2.0/node-v26.2.0-darwin-arm64.tar.gz
+          targets:
+            - cpu: arm64
+              os: darwin
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-JqVIDQ3ZUr6Gvq6D5mNtrNej/9F+9R0LJrybJg8rQuk=
+            type: binary
+            url: https://nodejs.org/download/release/v26.2.0/node-v26.2.0-darwin-x64.tar.gz
+          targets:
+            - cpu: x64
+              os: darwin
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-v1JGHSUBdHnNxUlkLE56IwOsXFOV18PQJtXYs/ooPAU=
+            type: binary
+            url: https://nodejs.org/download/release/v26.2.0/node-v26.2.0-linux-arm64.tar.gz
+          targets:
+            - cpu: arm64
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-S1JCmzWgSaDPV0NgzRsRy8nwMgHROHbyaJfJhj0l7Ek=
+            type: binary
+            url: https://nodejs.org/download/release/v26.2.0/node-v26.2.0-linux-ppc64le.tar.gz
+          targets:
+            - cpu: ppc64le
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-nQZJFOOKWz5qMHRkdAcZgRb3vHJPzlqWAM7OhKx9pnE=
+            type: binary
+            url: https://nodejs.org/download/release/v26.2.0/node-v26.2.0-linux-s390x.tar.gz
+          targets:
+            - cpu: s390x
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-jltLlpuyQUrKL/hNK5lghRGu3KMr+KhCfmGH291wO74=
+            type: binary
+            url: https://nodejs.org/download/release/v26.2.0/node-v26.2.0-linux-x64.tar.gz
+          targets:
+            - cpu: x64
+              os: linux
+        - resolution:
+            archive: zip
+            bin: node.exe
+            integrity: sha256-Ex76i9hY+K0AChoENti7EyDGOCkcd5qSH7IOVwKhzAo=
+            prefix: node-v26.2.0-win-arm64
+            type: binary
+            url: https://nodejs.org/download/release/v26.2.0/node-v26.2.0-win-arm64.zip
+          targets:
+            - cpu: arm64
+              os: win32
+        - resolution:
+            archive: zip
+            bin: node.exe
+            integrity: sha256-NxBxpPfiyKXdKAcwBJxoWRH+7MWfUOvEiNZ13BCHxpw=
+            prefix: node-v26.2.0-win-x64
+            type: binary
+            url: https://nodejs.org/download/release/v26.2.0/node-v26.2.0-win-x64.zip
+          targets:
+            - cpu: x64
+              os: win32
+    version: 26.2.0
+    hasBin: true
 
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
@@ -4636,6 +4729,8 @@ snapshots:
       find-elm-dependencies: 2.0.4
       lodash: 4.18.1
       temp: 0.9.4
+
+  node@runtime:26.2.0: {}
 
   normalize-path@3.0.0: {}
 
