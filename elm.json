@@ -12,7 +12,7 @@
             "dillonkearns/elm-bcp47-language-tag": "2.0.0",
             "dillonkearns/elm-form": "3.1.0",
             "dillonkearns/elm-markdown": "7.0.1",
-            "dillonkearns/elm-pages": "12.1.2",
+            "dillonkearns/elm-pages": "12.3.0",
             "dillonkearns/elm-rss": "2.0.5",
             "elm/browser": "1.0.2",
             "elm/bytes": "1.0.8",
@@ -33,6 +33,7 @@
             "phosphor-icons/phosphor-elm": "2.1.0"
         },
         "indirect": {
+            "BrianHicks/elm-string-graphemes": "1.0.4",
             "Chadtech/elm-bool-extra": "2.4.2",
             "MaybeJustJames/yaml": "2.1.7",
             "avh4/elm-color": "1.0.0",
@@ -53,9 +54,9 @@
             "jluckyiv/elm-utc-date-strings": "1.0.0",
             "justinmimbs/time-extra": "1.2.0",
             "lazamar/dict-parser": "1.0.2",
-            "mdgriffith/elm-codegen": "6.0.2",
+            "mdgriffith/elm-codegen": "6.0.3",
             "miniBill/elm-codec": "2.3.1",
-            "miniBill/elm-unicode": "1.1.1",
+            "miniBill/elm-unicode": "1.1.2",
             "noahzgordon/elm-color-extra": "1.0.2",
             "pithub/elm-parser-bug-workaround": "1.0.0",
             "pithub/elm-parser-extra": "1.0.0",

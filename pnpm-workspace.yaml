@@ -12,6 +12,11 @@ trustPolicy: no-downgrade
 trustPolicyExclude:
   - semver@5.7.2
 
+overrides:
+  'elm-pages>elm-optimize-level-2': '0.4.0'
+  'elm-optimize-level-2>typescript': '6.0.3'
+  'elm-optimize-level-2>@types/jest': '-'
+
 peerDependencyRules:
   allowedVersions:
     typescript: '6'
