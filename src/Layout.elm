@@ -12,7 +12,7 @@ import Route exposing (Route)
 import Settings
 import Svg
 import Svg.Attributes as SvgAttrs
-import Tailwind as Tw exposing (classes, raw)
+import Tailwind as Tw exposing (classes, decoration_color, raw)
 import Tailwind.Breakpoints exposing (dark, hover, sm, xl)
 import Tailwind.Extra exposing (svgClasses)
 import Tailwind.Theme
@@ -29,6 +29,7 @@ import Tailwind.Theme
         , s2
         , s4
         , s400
+        , s5
         , s500
         , s6
         , s600
@@ -97,7 +98,7 @@ viewMainMenuItem { label, route } =
             , Tw.text_color (gray s900)
             , dark [ Tw.text_color (gray s100) ]
             , hover [ Tw.underline ]
-            , raw "decoration-primary-500"
+            , decoration_color (primary s500)
             ]
         ]
         [ Html.text label ]
@@ -138,9 +139,9 @@ viewMenu showMenu onMenuToggle =
         [ classes
             [ Tw.flex
             , Tw.items_center
-            , raw "leading-5"
-            , raw "space-x-4"
-            , sm [ raw "space-x-6" ]
+            , Tw.leading s5
+            , Tw.space_x s4
+            , sm [ Tw.space_x s6 ]
             ]
         ]
         (mainMenuItems
@@ -170,8 +171,8 @@ viewMenu showMenu onMenuToggle =
                , Html.div
                     [ classes
                         [ Tw.fixed
-                        , raw "left-0"
-                        , raw "top-0"
+                        , Tw.left s0
+                        , Tw.top s0
                         , Tw.z_0
                         , Tw.h_full
                         , Tw.w_full
@@ -288,7 +289,7 @@ view showMenu onMenuToggle body =
                     [ classes
                         [ Tw.mb s2
                         , Tw.flex
-                        , raw "space-x-2"
+                        , Tw.space_x s2
                         , Tw.text_sm
                         , Tw.text_color (gray s500)
                         , dark [ Tw.text_color (gray s400) ]

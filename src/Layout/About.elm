@@ -10,20 +10,27 @@ import Layout.Markdown as Markdown
 import Pages.Url
 import Phosphor
 import Settings
-import Tailwind as Tw exposing (classes, raw)
+import Tailwind as Tw exposing (classes)
 import Tailwind.Breakpoints exposing (dark, hover, md, sm, xl)
 import Tailwind.Theme
     exposing
-        ( gray
+        ( current
+        , gray
         , primary
+        , s0
+        , s10
         , s100
+        , s14
         , s2
         , s200
+        , s3
         , s4
         , s400
         , s48
+        , s5
         , s500
         , s6
+        , s700
         , s8
         , s900
         )
@@ -102,7 +109,7 @@ socialsView socials =
                     [ Html.text name ]
                 , icon name Phosphor.Regular
                     |> Phosphor.withClass
-                        ([ raw "fill-current"
+                        ([ Tw.fill_simple current
                          , Tw.text_color (gray s500)
                          , hover [ Tw.text_color (primary s500) ]
                          , dark
@@ -119,19 +126,24 @@ socialsView socials =
                 ]
     in
     List.map socialView socials
-        |> Html.div [ classes [ Tw.flex, raw "space-x-3", Tw.pt s6 ] ]
+        |> Html.div [ classes [ Tw.flex, Tw.space_x s3, Tw.pt s6 ] ]
 
 
 view : Author -> Html msg
 view author =
     Html.div
-        [ classes [ Tw.divide_y, raw "divide-gray-200 dark:divide-gray-700" ] ]
+        [ classes
+            [ Tw.divide_y
+            , Tw.divide_color (gray s200)
+            , dark [ Tw.divide_color (gray s700) ]
+            ]
+        ]
         [ Html.div
             [ classes
-                [ raw "space-y-2"
+                [ Tw.space_y s2
                 , Tw.pb s8
                 , Tw.pt s6
-                , md [ raw "space-y-5" ]
+                , md [ Tw.space_y s5 ]
                 ]
             ]
             [ Html.h1
@@ -141,8 +153,8 @@ view author =
                     , Tw.tracking_tight
                     , Tw.text_color (gray s900)
                     , dark [ Tw.text_color (gray s100) ]
-                    , sm [ Tw.text_n4xl, raw "leading-10" ]
-                    , md [ Tw.text_n6xl, raw "leading-14" ]
+                    , sm [ Tw.text_n4xl, Tw.leading s10 ]
+                    , md [ Tw.text_n6xl, Tw.leading s14 ]
                     ]
                 ]
                 [ Html.text "About" ]
@@ -150,8 +162,8 @@ view author =
         , Html.div
             [ classes
                 [ Tw.items_start
-                , raw "space-y-2"
-                , xl [ Tw.grid, Tw.grid_cols_3, Tw.gap_x s8, raw "space-y-0" ]
+                , Tw.space_y s2
+                , xl [ Tw.grid, Tw.grid_cols_3, Tw.gap_x s8, Tw.space_y s0 ]
                 ]
             ]
             [ Html.div
@@ -159,7 +171,7 @@ view author =
                     [ Tw.flex
                     , Tw.flex_col
                     , Tw.items_center
-                    , raw "space-x-2"
+                    , Tw.space_x s2
                     , Tw.pt s8
                     ]
                 ]
@@ -181,8 +193,8 @@ view author =
                         , Tw.pt s4
                         , Tw.text_2xl
                         , Tw.font_bold
-                        , raw "leading-8"
-                        , raw "tracking-tight"
+                        , Tw.leading s8
+                        , Tw.tracking_tight
                         ]
                     ]
                     [ Html.text author.name ]
@@ -213,7 +225,7 @@ view author =
             , Html.div
                 [ classes
                     [ Tw.prose
-                    , raw "max-w-none"
+                    , Tw.max_w_none
                     , Tw.pb s8
                     , Tw.pt s8
                     , dark [ Tw.prose_invert ]
