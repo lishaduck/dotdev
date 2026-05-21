@@ -1,0 +1,21 @@
+diff --git a/vite-plugin/codegen.js b/vite-plugin/codegen.js
+index fdb1a9ff89996b7677149561c9fa6ab31e30f85b..acaf5b6ffb565ea97925beb505822a3db59580db 100644
+--- a/vite-plugin/codegen.js
++++ b/vite-plugin/codegen.js
+@@ -5,6 +5,7 @@ import { resolveTheme } from 'tailwind-resolver';
+ import { createRequire } from 'module';
+ import fs from 'fs';
+ import path from 'path';
++import { pathToFileURL } from 'url';
+ 
+ /**
+  * Load the Tailwind design system to discover all static utilities.
+@@ -40,7 +41,7 @@ async function loadDesignSystem(cssPath) {
+       },
+       // Required for @plugin directives to resolve npm packages
+       loadModule: async (id, base) => {
+-        const resolved = requireFromProject.resolve(id, { paths: [base] });
++        const resolved = pathToFileURL(requireFromProject.resolve(id, { paths: [base] })).href;
+         const mod = await import(resolved);
+         return { module: mod.default ?? mod, base: path.dirname(resolved) };
+       },

@@ -1,24 +1,26 @@
 allowBuilds:
   '@lydell/elm-json@0.2.13-1': true
-  elm@0.19.1-6: true
   elm-format@0.8.8: true
   elm-tailwind-classes@0.6.2: false
+  elm@0.19.1-6: true
   esbuild@0.27.7: true
   lamdera@0.19.1-1.4.0: true
 
 blockExoticSubdeps: true
 minimumReleaseAge: 1440
-trustPolicy: no-downgrade
-trustPolicyExclude:
-  - semver@5.7.2
 
 overrides:
-  'elm-pages>elm-optimize-level-2': '0.4.0'
-  'elm-optimize-level-2>typescript': '6.0.3'
   'elm-optimize-level-2>@types/jest': '-'
+  'elm-optimize-level-2>typescript': '6.0.3'
+  'elm-pages>elm-optimize-level-2': '0.4.0'
+patchedDependencies:
+  elm-tailwind-classes: patches/elm-tailwind-classes.patch
 
 peerDependencyRules:
   allowedVersions:
     typescript: '6'
 
 strictDepBuilds: true
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - semver@5.7.2

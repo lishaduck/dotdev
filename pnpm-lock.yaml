@@ -9,6 +9,11 @@ overrides:
   elm-optimize-level-2>typescript: 6.0.3
   elm-optimize-level-2>@types/jest: '-'
 
+patchedDependencies:
+  elm-tailwind-classes:
+    hash: aefa7747a6fabf92f43e484e6d8619c3470d02321ec38be6818dfecce33e1aba
+    path: patches/elm-tailwind-classes.patch
+
 importers:
 
   .:
@@ -52,7 +57,7 @@ importers:
         version: 2.13.5
       elm-tailwind-classes:
         specifier: ^0.6.4
-        version: 0.6.4(elm-review@2.13.5)(typescript@6.0.3)(vite@7.3.2(@types/node@25.9.1)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1))
+        version: 0.6.4(patch_hash=aefa7747a6fabf92f43e484e6d8619c3470d02321ec38be6818dfecce33e1aba)(elm-review@2.13.5)(typescript@6.0.3)(vite@7.3.2(@types/node@25.9.1)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1))
       lamdera:
         specifier: 0.19.1-1.4.0
         version: 0.19.1-1.4.0
@@ -3726,7 +3731,7 @@ snapshots:
 
   elm-solve-deps-wasm@2.0.0: {}
 
-  elm-tailwind-classes@0.6.4(elm-review@2.13.5)(typescript@6.0.3)(vite@7.3.2(@types/node@25.9.1)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1)):
+  elm-tailwind-classes@0.6.4(patch_hash=aefa7747a6fabf92f43e484e6d8619c3470d02321ec38be6818dfecce33e1aba)(elm-review@2.13.5)(typescript@6.0.3)(vite@7.3.2(@types/node@25.9.1)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1)):
     dependencies:
       elm-review: 2.13.5
       tailwind-resolver: 0.3.5(typescript@6.0.3)(vite@7.3.2(@types/node@25.9.1)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1))
