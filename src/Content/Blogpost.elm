@@ -29,6 +29,7 @@ import String.Normalize
 type alias Blogpost =
     { metadata : Metadata
     , body : List Block
+    , raw : String
     , previousPost : Maybe Metadata
     , nextPost : Maybe Metadata
     }
@@ -186,6 +187,7 @@ allBlogposts =
                                         Blogpost
                                             { metadata | readingTimeInMin = calculateReadingTime markdownString }
                                             body
+                                            markdownString
                                             Nothing
                                             Nothing
                                     )

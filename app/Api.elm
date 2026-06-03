@@ -46,7 +46,7 @@ rssRoute =
 
 
 blogpostToRssItem : Content.Blogpost.Blogpost -> Rss.Item
-blogpostToRssItem { metadata } =
+blogpostToRssItem { metadata, raw } =
     { title = metadata.title
     , description = metadata.description |> Maybe.withDefault ""
     , url = "/blog/" ++ metadata.slug
